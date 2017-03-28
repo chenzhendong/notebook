@@ -16,6 +16,8 @@ produces:
   - application/json
 paths:
   /test:
+    testId:
+      type: int
     post:
       summary: Test Request
       description: |
@@ -32,6 +34,29 @@ paths:
           schema:
             $ref: '#/definitions/Error'
             
+  /test/{testId}:
+    get:
+      summary: Retieve Test Result
+      description: Get a Test Result to Dev Engine
+      parameters:
+        - name: testId
+          in: path
+          required: true
+          description: The test result
+          type: int
+        responses:
+          200:
+            description: Return Test result with ID
+            body:
+            
+          404:
+            description: Test result not found
+            body:
+              
+          default:
+            description: Unexpected error
+            schema:
+              $ref: '#/definitions/Error'
   
   
 definitions:
